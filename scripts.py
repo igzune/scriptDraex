@@ -3,6 +3,9 @@ import pandas as pd
 import json
 import os
 import shutil
+
+import sqlalchemy.exc
+
 import model
 import asyncio
 
@@ -44,6 +47,13 @@ def MultiLoad():
     excelNames = [x for x in filesX if x[:2] != '~$' and x[-5:] == '.xlsx' or x[-4:] == '.xls']
     write = []
     for x in excelNames:
-        result = WriteToDbJson(x)
-        write.append(result)
-    return write
+        try:
+            result = WriteToDbJson(x)
+            write.append(result)
+        except sqlalchemy.exc.IntegrityError as e:
+            return print('An error was popped up'+str(e.args)+x)
+        else:
+            return print(write)
+
+# Del layout, se toma el No parte padre y el numero de factura, para buscar el id_ventmate de este y guardarlo en
+# id_producto, esto por cada partida del layout de carga
