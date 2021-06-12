@@ -144,7 +144,56 @@ class DraexVentmate(Base):
     bln_desperdicio = sqlalchemy.Column(sqlalchemy.Boolean)
 
 
-def WriteDraexVentmate(material):
+def WriteDraexVentmate(vmaterial):
+    Base.metadata.create_all(engine)
+    Session = sqlalchemy.orm.sessionmaker()
+    Session.configure(bind=engine)
+    session = Session()
+    session.add(vmaterial)
+    session.commit()
+
+
+class DraexMate(Base):
+    __tablename__ = 'DraexMate'
+    clave_material = sqlalchemy.Column(sqlalchemy.String(length=30), primary_key=True, nullable=False)
+    clave_familia = sqlalchemy.Column(sqlalchemy.String(length=20))
+    clave_categoria = sqlalchemy.Column(sqlalchemy.String(length=5))
+    descripcion = sqlalchemy.Column(sqlalchemy.String(length=250), nullable=False)
+    precio_unitario = sqlalchemy.Column(sqlalchemy.Numeric(precision=6))
+    comprado = sqlalchemy.Column(sqlalchemy.Boolean, nullable=False)
+    vendido = sqlalchemy.Column(sqlalchemy.Boolean, nullable=False)
+    padre = sqlalchemy.Column(sqlalchemy.Boolean, nullable=False)
+    hijo = sqlalchemy.Column(sqlalchemy.Boolean, nullable=False)
+    tipo = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
+    clave_fraccion = sqlalchemy.Column(sqlalchemy.String(length=20))
+    clave_fraccion3 = sqlalchemy.Column(sqlalchemy.String(length=20))
+    adicional1 = sqlalchemy.Column(sqlalchemy.String(length=50))
+    adicional2 = sqlalchemy.Column(sqlalchemy.String(length=50))
+    adicional3 = sqlalchemy.Column(sqlalchemy.String(length=50))
+    marca = sqlalchemy.Column(sqlalchemy.String(length=100))
+    modelo = sqlalchemy.Column(sqlalchemy.String(length=50))
+    depreciacion = sqlalchemy.Column(sqlalchemy.Integer)
+    descripcion2 = sqlalchemy.Column(sqlalchemy.String(length=250))
+    clave_fraccionusa = sqlalchemy.Column(sqlalchemy.String(length=20))
+    clave_pais = sqlalchemy.Column(sqlalchemy.String(length=3))
+    va = sqlalchemy.Column(sqlalchemy.Numeric(precision=6))
+    clave_pais2 = sqlalchemy.Column(sqlalchemy.String(length=3))
+    tipo_mate = sqlalchemy.Column(sqlalchemy.Integer)
+    consignado = sqlalchemy.Column(sqlalchemy.Boolean)
+    desensamble = sqlalchemy.Column(sqlalchemy.Boolean)
+    regla2da = sqlalchemy.Column(sqlalchemy.Boolean)
+    regimen = sqlalchemy.Column(sqlalchemy.String(length=2))
+    actualizado = sqlalchemy.Column(sqlalchemy.Boolean)
+    clave_r8a = sqlalchemy.Column(sqlalchemy.String(length=20))
+    completar_proceso = sqlalchemy.Column(sqlalchemy.String(length=10))
+    estatus_co = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
+    cert_origen = sqlalchemy.Column(sqlalchemy.String(length=20))
+    fecha_co = sqlalchemy.Column(sqlalchemy.Date)
+    isEXD = sqlalchemy.Column(sqlalchemy.Boolean)
+    clave_desperdicio = sqlalchemy.Column(sqlalchemy.String(length=20))
+
+
+def WriteDraexMate(material):
     Base.metadata.create_all(engine)
     Session = sqlalchemy.orm.sessionmaker()
     Session.configure(bind=engine)
