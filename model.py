@@ -1,8 +1,10 @@
 import sqlalchemy
+import pymongo
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime, date
 
-engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:usuario123@localhost:3306/axldraex', echo=True)
+#engine = sqlalchemy.create_engine('mysql+mysqlconnector://root:usuario123@localhost:3306/axldraex', echo=True)
+engine = sqlalchemy.create_engine('mongo+srv://root:root123@cluster0.3xetj.mongodb.net/myFirstDataBase?retryWrites=true&w=majority', echo=True)
 Base = declarative_base()
 
 
