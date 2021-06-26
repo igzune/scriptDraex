@@ -11,8 +11,10 @@ import asyncio
 
 
 def ExcelToJson(file_name, headers):
-    dir_excel = 'C:/python3_9_1/proyecto2/Draex/script/archivos/'
-    dir_ex_read = 'C:/python3_9_1/proyecto2/Draex/script/archivos/Procesado/'
+    dir_excel = '/home/igzune/PycharmProjects/scriptDraex/script/archivos/'
+    # dir_excel = 'C:/python3_9_1/proyecto2/Draex/script/archivos/'
+    dir_ex_read = '/home/igzune/PycharmProjects/scriptDraex/script/archivos/Procesado/'
+    # dir_ex_read = 'C:/python3_9_1/proyecto2/Draex/script/archivos/Procesado/'
     df = pd.read_excel(dir_excel+file_name, sheet_name=0, header=headers)
     result = df.to_json(orient='index')
     js = json.loads(result)
@@ -41,7 +43,8 @@ def WriteToDbJson(excel):
 
 
 def MultiLoad():
-    dirExcel = 'C:/python3_9_1/proyecto2/Draex/script/archivos/'
+    dirExcel = '/home/igzune/PycharmProjects/scriptDraex/script/archivos/'
+    # dirExcel = 'C:/python3_9_1/proyecto2/Draex/script/archivos/'
     # The variable filesX save the files names in a directory, and the variable save the files names with .xls or .xlsx.
     filesX = os.listdir(dirExcel)
     excelNames = [x for x in filesX if x[:2] != '~$' and x[-5:] == '.xlsx' or x[-4:] == '.xls']
@@ -54,6 +57,12 @@ def MultiLoad():
             return print('An error was popped up'+str(e.args)+x)
         else:
             return print(write)
+
+
+vent = model.DraexVent(
+            factura='DPA2606198'
+        )
+model.WriteDraexVentmate(vent)
 
 # Del layout, se toma el No parte padre y el numero de factura, para buscar el id_ventmate de este y guardarlo en
 # id_producto, esto por cada partida del layout de carga
